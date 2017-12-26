@@ -11,7 +11,7 @@ export class OperationsService {
   static readonly sqRoot = (value: number) => Math.sqrt(value);
 
   // public equals(currentValue: number, method: Methods, value: number): number {
-  public equals(values): number {
+  public equals(values): number | string {
     let updatedValue: number;
     const {currentValue, method, newValue} = values;
     switch (method) {
@@ -31,6 +31,6 @@ export class OperationsService {
         updatedValue = OperationsService.sqRoot(currentValue);
         break;
     }
-    return updatedValue;
+    return updatedValue || 'Error';
   }
 }
