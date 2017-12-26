@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
+import { ClearingService, MemoryService, OperationsService } from './services'
 
 import { AppComponent } from './app.component';
 
@@ -10,9 +13,11 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [ClearingService, MemoryService, OperationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
