@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { OperationsService } from './../services';
-import { Methods } from './../core/consts';
+import { OperationsService, MemoryService } from './../services';
+import { Methods, ErrorMessages } from './../core/consts';
 
 @Component({
   selector: 'c-calculator',
@@ -15,13 +15,13 @@ export class CalculatorComponent {
   public displayValue: any = '';
   public result: number;
 
-  constructor(private operation: OperationsService) { }
+  constructor(private operation: OperationsService, private memory: MemoryService) { }
 
   public concatenateValue(value: string) {
     this.displayValue = `${this.displayValue}${value}`;
   }
 
-  private updatePrerequisites(method:string) {
+  private updatePrerequisites(method: string) {
     this.currentMethod = Methods[method];
     this.values.push(+this.displayValue);
     this.resetScreen();
@@ -30,13 +30,13 @@ export class CalculatorComponent {
   private calculate(method) {
     switch (method) {
       case Methods.add:
-      this.result = this.values.reduce(this.operation.add)
+        this.result = this.values.reduce(this.operation.add)
         break;
       case Methods.subtract:
         this.result = this.values.reduce(this.operation.subtract)
         break;
       case Methods.divide:
-      this.result = this.values.reduce(this.operation.divide)
+        this.result = this.values.reduce(this.operation.divide)
         break;
       case Methods.sqRoot:
         this.result = this.operation.sqRoot(this.values[0]);
@@ -54,20 +54,15 @@ export class CalculatorComponent {
     this.displayValue = '';
   }
 
-private resetValues() {
-  this.values = Array.from(+this.displayValue);
-}
+  private resetValues() {
+    this.values = Array.from(+this.displayValue);
+  }
 
   public updateCurrentValue() {
     this.values.push(+this.displayValue);
     this.calculate(this.currentMethod);
     this.displayValue = this.result;
     this.resetValues()
-    //thid.
-    // if(!result || isNaN(result)) {
-    //     this.displayValue = 'Error';
-    //     return;
-    // }
   }
 
   public clear() {
@@ -75,7 +70,35 @@ private resetValues() {
     this.values = [];
   }
 
-  public toggleSign(){
-    this.displayValue = (+this.displayValue*(-1));
+  public toggleSign() {
+    this.displayValue = (+this.displayValue * (-1));
+  }
+
+  public memorySettingHandler() {
+    if (this.memory.readFromMemory) {
+      this.memory.addInMemory(+this.displayValue);
+    } else {
+      this.memory.saveToMemory = +this.displayValue;
+    }
+  }
+
+  public readFromMemory() {
+    this.memory.readFromMemory ? this.displayValue = `${this.memory.readFromMemory}` : ErrorMessages.MemoryEmpty;
+  }
+
+  public memorySubtract() {
+    if (!this.memory.readFromMemory) {
+      return;
+    }
+    this.memory.subtractInMemory(+this.displayValue);
+  }
+
+  public clearAll() {
+    this.clear();
+    this.memory.clearMemory();
+  }
+
+  public clearMemory() {
+    this.memory.clearMemory();
   }
 }

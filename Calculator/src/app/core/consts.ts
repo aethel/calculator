@@ -3,5 +3,10 @@ export enum Methods {
   subtract,
   multiply,
   divide,
-  sqRoot 
+  sqRoot
+}
+
+export const ErrorMessages = {
+  MemoryEmpty: 'Memory Empty',
+  Error: 'Error';
 }
