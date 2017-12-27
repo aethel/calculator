@@ -10,69 +10,72 @@ import { Methods } from './../core/consts';
 })
 export class CalculatorComponent {
 
-  private method: Methods;
-  private oldValue: number;
-  private newValue: number;
-  public displayValue = '';
+  private values: number[] = [];
+  private currentMethod: Methods;
+  public displayValue: any = '';
+  public result: number;
 
   constructor(private operation: OperationsService) { }
 
-  public concatenateValue(value: string) {    
-    return this.displayValue = `${this.displayValue}${value}`;
+  public concatenateValue(value: string) {
+    this.displayValue = `${this.displayValue}${value}`;
   }
 
-  public processCalculation(method: string) {
-    !this.method ? this.storeNumberValues('older') : this.storeNumberValues(null, 'newer');
-    this.setMethod(method);
+  private updatePrerequisites(method:string) {
+    this.currentMethod = Methods[method];
+    this.values.push(+this.displayValue);
     this.resetScreen();
   }
 
-  private setMethod(method) {
-    if (!method) {
-      return;
-    }
+  private calculate(method) {
     switch (method) {
-      case Methods[Methods.add]:
-        this.method = Methods.add;
+      case Methods.add:
+      this.result = this.values.reduce(this.operation.add)
         break;
-      case Methods[Methods.subtract]:
-        this.method = Methods.subtract;
+      case Methods.subtract:
+        this.result = this.values.reduce(this.operation.subtract)
         break;
-      case Methods[Methods.divide]:
-        this.method = Methods.divide;
+      case Methods.divide:
+      this.result = this.values.reduce(this.operation.divide)
         break;
-      case Methods[Methods.sqRoot]:
-        this.method = Methods.sqRoot;
-        this.updateCurrentValue()
+      case Methods.sqRoot:
+        this.result = this.operation.sqRoot(this.values[0]);
         break;
-      case Methods[Methods.multiply]:
-        this.method = Methods.multiply;
+      case Methods.multiply:
+        this.result = this.values.reduce(this.operation.multiply)
         break;
       default:
         break;
     }
+    console.log(this.result);
   }
 
   private resetScreen() {
     this.displayValue = '';
   }
 
-  private storeNumberValues(older = null, newer = null) {
-    older ? this.oldValue = +this.displayValue : this.newValue = +this.displayValue;
-  }
+private resetValues() {
+  this.values = Array.from(+this.displayValue);
+}
 
   public updateCurrentValue() {
-    const values = {
-      currentValue: this.oldValue,
-      method: this.method,
-      newValue: this.newValue
-    }
-    this.displayValue = this.operation.equals(values).toString();
+    this.values.push(+this.displayValue);
+    this.calculate(this.currentMethod);
+    this.displayValue = this.result;
+    this.resetValues()
+    //thid.
+    // if(!result || isNaN(result)) {
+    //     this.displayValue = 'Error';
+    //     return;
+    // }
   }
 
   public clear() {
     this.displayValue = '';
-    this.oldValue = null;
-    this.newValue = null;
+    this.values = [];
+  }
+
+  public toggleSign(){
+    this.displayValue = (+this.displayValue*(-1));
   }
 }
