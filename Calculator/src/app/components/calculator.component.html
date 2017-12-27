@@ -1,17 +1,17 @@
 <input type="text" readonly [ngModel]="displayValue" />
-<button (click)="concatenateValue('1')">1</button>
-<button (click)="concatenateValue('2')">2</button>
-<button (click)="concatenateValue('3')">3</button>
-<button (click)="concatenateValue('4')">4</button>
-<button (click)="concatenateValue('5')">5</button>
-<button (click)="concatenateValue('6')">6</button>
-<button (click)="concatenateValue('7')">7</button>
-<button (click)="concatenateValue('8')">8</button>
-<button (click)="concatenateValue('9')">9</button>
-<button (click)="concatenateValue('0')">0</button>
-<button (click)="concatenateValue('.')">.</button>
+<button (click)="updateExpression('1')">1</button>
+<button (click)="updateExpression('2')">2</button>
+<button (click)="updateExpression('3')">3</button>
+<button (click)="updateExpression('4')">4</button>
+<button (click)="updateExpression('5')">5</button>
+<button (click)="updateExpression('6')">6</button>
+<button (click)="updateExpression('7')">7</button>
+<button (click)="updateExpression('8')">8</button>
+<button (click)="updateExpression('9')">9</button>
+<button (click)="updateExpression('0')">0</button>
+<button (click)="updateExpression('.')">.</button>
 
-
+<!--
 <button (click)="toggleSign()">+/-</button>
 <button (click)="updatePrerequisites('add')">+</button>
 <button (click)="updatePrerequisites('subtract')">-</button>
@@ -19,6 +19,21 @@
 <button (click)="updatePrerequisites('multiply')">*</button>
 <button (click)="updatePrerequisites('sqRoot'); updateCurrentValue()">sqRoot</button>
 <button (click)="updateCurrentValue()">=</button>
+<button (click)="clear()">C</button>
+<button (click)="clearAll()">AC</button>
+<button (click)="readFromMemory()">MR</button>
+<button (click)="clearMemory()">MC</button>
+<button (click)="memorySettingHandler()">M+</button>
+<button (click)="memorySubtract()">M-</button> -->
+
+
+<!-- <button (click)="toggleSign()">+/-</button> -->
+<button (click)="updateExpression('+')">+</button>
+<button (click)="updateExpression('-')">-</button>
+<button (click)="updateExpression('/')">/</button>
+<button (click)="updateExpression('*')">*</button>
+<button (click)="calculate('sqRoot');">&radic;</button>
+<button (click)="equals()">=</button>
 <button (click)="clear()">C</button>
 <button (click)="clearAll()">AC</button>
 <button (click)="readFromMemory()">MR</button>

@@ -4,12 +4,12 @@ import { Methods } from './../core/consts';
 @Injectable()
 export class OperationsService {
 
-public add = (total: number, num: number) => total + num;
-public subtract = (total: number, num: number) => total - num;
-public multiply = (total: number, num: number) => total * num;
-public divide = (total: number, num: number) => total / num;
+// public add = (total: number, num: number) => total + num;
+// public subtract = (total: number, num: number) => total - num;
+// public multiply = (total: number, num: number) => total * num;
+// public divide = (total: number, num: number) => total / num;
 public sqRoot = (total: number) => Math.sqrt(total);
-
+public equals = (value:string) :string => eval(value);
   // public equals(currentValue: number, method: Methods, value: number): number {
   // public equals(values): number {
   //   let updatedValue: number;

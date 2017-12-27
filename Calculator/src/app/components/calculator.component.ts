@@ -10,6 +10,8 @@ import { Methods, ErrorMessages } from './../core/consts';
 })
 export class CalculatorComponent {
 
+  private inputArray :any[] = [];
+
   private values: number[] = [];
   private currentMethod: Methods;
   public displayValue: any = '';
@@ -17,80 +19,73 @@ export class CalculatorComponent {
 
   constructor(private operation: OperationsService, private memory: MemoryService) { }
 
-  public concatenateValue(value: string) {
-    this.displayValue = `${this.displayValue}${value}`;
+  public updateExpression(value: string) {
+    this.inputArray.push(value);
+    this.displayValue = this.inputArray.join('');
   }
 
-  private updatePrerequisites(method: string) {
-    this.currentMethod = Methods[method];
-    this.values.push(+this.displayValue);
-    this.resetScreen();
+  private resetInputs () {
+    this.inputArray = [];
   }
 
-  private calculate(method) {
+  public equals() {
+    this.displayValue = `${this.operation.equals(this.displayValue)}`
+  }
+
+
+  public calculate(method) {
     switch (method) {
-      case Methods.add:
-        this.result = this.values.reduce(this.operation.add)
-        break;
-      case Methods.subtract:
-        this.result = this.values.reduce(this.operation.subtract)
-        break;
-      case Methods.divide:
-        this.result = this.values.reduce(this.operation.divide)
-        break;
-      case Methods.sqRoot:
-        this.result = this.operation.sqRoot(this.values[0]);
-        break;
-      case Methods.multiply:
-        this.result = this.values.reduce(this.operation.multiply)
+      case Methods[Methods.sqRoot]:
+        this.displayValue = `${this.operation.sqRoot(+this.inputArray[this.inputArray.length - 1])}`;
+        this.resetInputs();
         break;
       default:
         break;
     }
-    console.log(this.result);
-  }
-
-  private resetScreen() {
-    this.displayValue = '';
-  }
-
-  private resetValues() {
-    this.values = Array.from(+this.displayValue);
-  }
-
-  public updateCurrentValue() {
-    this.values.push(+this.displayValue);
-    this.calculate(this.currentMethod);
-    this.displayValue = this.result;
-    this.resetValues()
   }
 
   public clear() {
     this.displayValue = '';
-    this.values = [];
+    this.resetInputs();
   }
 
   public toggleSign() {
-    this.displayValue = (+this.displayValue * (-1));
+    // TODO
+    // let lastInput = this.inputArray[this.inputArray.length - 1]);
+    // let lastInputArr = [...lastInput];
+    // if (lastInputArr.length === 1) {
+    //   lastInput = +lastInput;
+    // } else {
+    //   lastInput = lastInputArr.filter(item => item !== '(' && item !== ')').join('');
+    // }
+    //
+    // if (lastInput > 0) {
+    //   this.inputArray.splice(this.inputArray.length - 1,1,`(${lastInput*(-1)})`);
+    // } else {
+    //   this.inputArray.splice(this.inputArray.length - 1,1,lastInput*(-1));
+    // }
   }
 
-  public memorySettingHandler() {
+  public memorySettingHandler () {
     if (this.memory.readFromMemory) {
-      this.memory.addInMemory(+this.displayValue);
+      this.memory.addInMemory(+this.operation.equals(this.displayValue));
     } else {
-      this.memory.saveToMemory = +this.displayValue;
+      this.equals();
+      this.memory.saveToMemory = +this.operation.equals(this.displayValue);
+      this.resetInputs();
     }
   }
 
   public readFromMemory() {
     this.memory.readFromMemory ? this.displayValue = `${this.memory.readFromMemory}` : ErrorMessages.MemoryEmpty;
+    this.resetInputs();
   }
 
   public memorySubtract() {
     if (!this.memory.readFromMemory) {
       return;
     }
-    this.memory.subtractInMemory(+this.displayValue);
+    this.memory.subtractInMemory(+this.operation.equals(this.displayValue));
   }
 
   public clearAll() {

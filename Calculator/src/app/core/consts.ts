@@ -8,5 +8,5 @@ export enum Methods {
 
 export const ErrorMessages = {
   MemoryEmpty: 'Memory Empty',
-  Error: 'Error';
+  Error: 'Error'
 }
