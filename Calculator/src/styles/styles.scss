@@ -1,6 +1,6 @@
+@import "./global/reset";
 @import "./global/variables";
-@import "./atoms/input";
+@import "./global/typography";
 
-body {
-  background-color: pink;
-}
+
+@import "./organisms/layout";
