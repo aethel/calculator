@@ -44,10 +44,6 @@ export class CalculatorComponent {
     }
   }
 
-  public clear() {
-    this.displayValue = '';
-    this.resetInputs();
-  }
 
   public toggleSign() {
     // TODO
@@ -86,6 +82,11 @@ export class CalculatorComponent {
       return;
     }
     this.memory.subtractInMemory(+this.operation.equals(this.displayValue));
+  }
+
+  public clear() {
+    this.displayValue = '';
+    this.resetInputs();
   }
 
   public clearAll() {
