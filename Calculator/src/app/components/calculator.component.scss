@@ -4,10 +4,10 @@
 
 .case {
   margin: 0 auto;
-  width: 39rem;
+  width: 32rem;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: 18.5rem 18.5rem;
+  grid-template-columns: 15rem 15rem;
   grid-template-areas:
     "logo panel"
     "result result"
@@ -33,4 +33,9 @@
 
 .keys {
   grid-area: keys;
+}
+
+c-button {
+  display:flex;
+  justify-content: center;
 }

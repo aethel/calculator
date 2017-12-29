@@ -6,6 +6,14 @@ export enum Methods {
   sqRoot
 }
 
+export enum Buttons {
+  short,
+  tall,
+  smallFont,
+  guards,
+  warn
+}
+
 export const ErrorMessages = {
   MemoryEmpty: 'Memory Empty',
   Error: 'Error'
