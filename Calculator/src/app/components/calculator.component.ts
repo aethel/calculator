@@ -53,23 +53,6 @@ export class CalculatorComponent {
     }
   }
 
-  public toggleSign() {
-    // TODO
-    // let lastInput = this.inputArray[this.inputArray.length - 1]);
-    // let lastInputArr = [...lastInput];
-    // if (lastInputArr.length === 1) {
-    //   lastInput = +lastInput;
-    // } else {
-    //   lastInput = lastInputArr.filter(item => item !== '(' && item !== ')').join('');
-    // }
-    //
-    // if (lastInput > 0) {
-    //   this.inputArray.splice(this.inputArray.length - 1,1,`(${lastInput*(-1)})`);
-    // } else {
-    //   this.inputArray.splice(this.inputArray.length - 1,1,lastInput*(-1));
-    // }
-  }
-
   public memorySettingHandler() {
     if (this.memory.readFromMemory) {
       this.memory.addInMemory(+this.operation.equals(this.displayValue));
