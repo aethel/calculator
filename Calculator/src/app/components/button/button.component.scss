@@ -1,7 +1,5 @@
 @import '~styles/global/variables';
 @import '~styles/global/mixins';
-// $button-list: $
-// $button-alt-list
 
 .default-btn {
   @include gradient(180deg, $button-list);
@@ -13,6 +11,9 @@
   box-shadow: 0 0 0.15rem 0.25rem $black, 0 0.5rem 1rem fade-out($black,0.5);
   width: 4.8rem;
   font-family: $key-font;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .default-btn--short {

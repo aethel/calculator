@@ -1,7 +1,3 @@
-.case >* {
-  outline: 1px solid red;
-}
-
 .case {
   margin: 0 auto;
   width: 32rem;
@@ -38,4 +34,8 @@
 c-button {
   display:flex;
   justify-content: center;
+}
+
+.serial c-button:not(:last-child) {
+  margin-right: 1.5rem;
 }
