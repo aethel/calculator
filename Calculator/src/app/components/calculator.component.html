@@ -18,12 +18,12 @@
     <c-button [class.is-off]="!calculatorOn" (click)="memorySubtract()" type="smallFont" key="M-"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="memorySettingHandler()" type="smallFont" key="M+"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('/')" key="/"></c-button>
-    <c-button [class.is-off]="!calculatorOn" disabled (click)="updateExpression('%')" key="%"></c-button>
+    <c-button class="is-off" disabled (click)="updateExpression('%')" key="%"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('7')" key="7"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('8')" key="8"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('9')" key="9"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('*')" key="X"></c-button>
-    <c-button [class.is-off]="!calculatorOn" disabled (click)="updateExpression('*')" key="+/-"></c-button>
+    <c-button class="is-off" disabled (click)="updateExpression('*')" key="+/-"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('4')" key="4"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('5')" key="5"></c-button>
     <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('6')" key="6"></c-button>
