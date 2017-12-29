@@ -3,12 +3,16 @@
   <div class="panel">
     <div class="panel__face"></div>
   </div>
-  <div class="result"></div>
+  <div class="result">
+    <div class="result__wrapper">
+      <input class="result__display" type="text" readonly [ngModel]="displayValue" />
+    </div>
+  </div>
   <div class="serial"></div>
   <div class="keys"></div>
 </div>
 
-<input type="text" readonly [ngModel]="displayValue" />
+
 <button (click)="updateExpression('1')">1</button>
 <button (click)="updateExpression('2')">2</button>
 <button (click)="updateExpression('3')">3</button>

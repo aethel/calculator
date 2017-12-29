@@ -1,13 +1,15 @@
 .case >* {
   outline: 1px solid red;
 }
-
+// * {
+//   box-sizing: border-box;;
+// }
 .case {
   margin: 0 auto;
-  width: calc(22rem + 30vw);
+  width: 39rem;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: calc((20rem + 30vw)/2) calc((20rem + 30vw)/2);
+  grid-template-columns: 18.5rem 18.5rem;
   grid-template-areas:
     "logo panel"
     "result result"

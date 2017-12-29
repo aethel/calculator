@@ -1,4 +1,12 @@
 html, body {
   font-size: 62.5%;
-  line-height: 1;  
+  line-height: 1;
+}
+
+@font-face {
+	font-family: "alarmClock";
+	src: url("~/assets/fonts/subset-alarmclock.woff2") format("woff2"),
+		 url("~/assets/fonts/subset-alarmclock.woff") format("woff"),
+		 url("~/assets/fonts/subset-alarmclock.ttf") format("truetype"),
+		 url("~/assets/fonts/subset-alarmclock.svg#subset-alarmclock") format("svg");
 }

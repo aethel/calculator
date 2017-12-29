@@ -1,9 +1,11 @@
 @import "./global/reset";
 @import "./global/variables";
+@import "./global/mixins";
 @import "./global/typography";
 
 @import "./molecules/case";
 @import "./molecules/panel";
 @import "./molecules/logo";
+@import "./molecules/display";
 
 @import "./organisms/layout";
