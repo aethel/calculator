@@ -1,11 +1,5 @@
 @import '~styles/global/variables';
 @import '~styles/global/mixins';
-// $button-list: $
-// $button-alt-list
-
-.default-btn {
-
-}
 
 .default-btn__wrapper {
   @include gradient(180deg, $button-list);

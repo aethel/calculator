@@ -12,12 +12,10 @@ export class ButtonComponent implements OnInit {
   public typeClass: string;
 
 ngOnInit() {
-  console.log(this.type)
   this.typeClass = this.assignType(this.type);
 }
 
   public assignType(type: string): string {
-    console.log(type);
     let className: string;
     switch (type) {
       case Buttons[Buttons.short]:

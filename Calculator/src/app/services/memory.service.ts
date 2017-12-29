@@ -3,15 +3,13 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MemoryService {
 
-  //save to memroy ()
-  //read from memory()
-  //add new value to memory val()
-  //subtract from new val from memory val()
-private memoryValue: number;
+  private memoryValue: number;
 
-  public set saveToMemory(value:number) {
-    this.memoryValue = value;
-    console.log(this.memoryValue);
+  public set saveToMemory(value: number) {
+    if (!isNaN(value)) {
+      this.memoryValue = value;
+      console.log(this.memoryValue);
+    }
   }
 
   public get readFromMemory(): number {
@@ -28,10 +26,7 @@ private memoryValue: number;
     console.log(this.memoryValue);
   }
 
-  public clearMemory(){
+  public clearMemory() {
     this.memoryValue = null;
   }
-
-
-
 }

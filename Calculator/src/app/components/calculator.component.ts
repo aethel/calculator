@@ -10,12 +10,9 @@ import { Methods, ErrorMessages } from './../core/consts';
 })
 export class CalculatorComponent {
 
-  private inputArray :any[] = [];
-
-  private values: number[] = [];
-  private currentMethod: Methods;
+  private inputArray: any[] = [];
   public displayValue: any = '';
-  public result: number;
+  public calculatorOn = false;
 
   constructor(private operation: OperationsService, private memory: MemoryService) { }
 
@@ -24,26 +21,37 @@ export class CalculatorComponent {
     this.displayValue = this.inputArray.join('');
   }
 
-  private resetInputs () {
+  public on() {
+    this.displayValue = '0';
+    this.calculatorOn = true;
+  }
+
+  public off() {
+    this.displayValue = '';
+    this.calculatorOn = false;
+  }
+
+  private resetInputs() {
     this.inputArray = [];
   }
 
   public equals() {
-    this.displayValue = `${this.operation.equals(this.displayValue)}`
+    this.displayValue = `${this.operation.equals(this.displayValue)}`;
+    this.resetInputs();
+    this.inputArray.push(this.displayValue);
   }
-
 
   public calculate(method) {
     switch (method) {
       case Methods[Methods.sqRoot]:
-        this.displayValue = `${this.operation.sqRoot(+this.inputArray[this.inputArray.length - 1])}`;
+        this.displayValue = `${this.operation.sqRoot(+this.displayValue)}`;
         this.resetInputs();
+        this.inputArray.push(this.displayValue);
         break;
       default:
         break;
     }
   }
-
 
   public toggleSign() {
     // TODO
@@ -62,13 +70,15 @@ export class CalculatorComponent {
     // }
   }
 
-  public memorySettingHandler () {
+  public memorySettingHandler() {
     if (this.memory.readFromMemory) {
       this.memory.addInMemory(+this.operation.equals(this.displayValue));
     } else {
-      this.equals();
-      this.memory.saveToMemory = +this.operation.equals(this.displayValue);
-      this.resetInputs();
+      if (this.displayValue.length !== 0) {
+        this.equals();
+        this.memory.saveToMemory = +this.operation.equals(this.displayValue);
+        this.resetInputs();
+      }
     }
   }
 
@@ -92,6 +102,14 @@ export class CalculatorComponent {
   public clearAll() {
     this.clear();
     this.memory.clearMemory();
+  }
+
+  public acHandler() {
+    if (this.calculatorOn) {
+      this.clearAll();
+    } else {
+      this.on();
+    }
   }
 
   public clearMemory() {
