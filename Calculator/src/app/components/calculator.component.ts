@@ -6,96 +6,110 @@ import { Methods, ErrorMessages } from './../core/consts';
 @Component({
   selector: 'c-calculator',
   templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css']
+  styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent {
 
-  private values: number[] = [];
-  private currentMethod: Methods;
+  private inputArray: any[] = [];
   public displayValue: any = '';
-  public result: number;
+  public calculatorOn = false;
 
   constructor(private operation: OperationsService, private memory: MemoryService) { }
 
-  public concatenateValue(value: string) {
-    this.displayValue = `${this.displayValue}${value}`;
+  public updateExpression(value: string) {
+    this.inputArray.push(value);
+    this.displayValue = this.inputArray.join('');
   }
 
-  private updatePrerequisites(method: string) {
-    this.currentMethod = Methods[method];
-    this.values.push(+this.displayValue);
-    this.resetScreen();
+  public on() {
+    this.displayValue = '0';
+    this.calculatorOn = true;
   }
 
-  private calculate(method) {
+  public off() {
+    this.displayValue = '';
+    this.calculatorOn = false;
+  }
+
+  private resetInputs() {
+    this.inputArray = [];
+  }
+
+  public equals() {
+    this.displayValue = `${this.operation.equals(this.displayValue)}`;
+    this.resetInputs();
+    this.inputArray.push(this.displayValue);
+  }
+
+  public calculate(method) {
     switch (method) {
-      case Methods.add:
-        this.result = this.values.reduce(this.operation.add)
-        break;
-      case Methods.subtract:
-        this.result = this.values.reduce(this.operation.subtract)
-        break;
-      case Methods.divide:
-        this.result = this.values.reduce(this.operation.divide)
-        break;
-      case Methods.sqRoot:
-        this.result = this.operation.sqRoot(this.values[0]);
-        break;
-      case Methods.multiply:
-        this.result = this.values.reduce(this.operation.multiply)
+      case Methods[Methods.sqRoot]:
+        this.displayValue = `${this.operation.sqRoot(+this.displayValue)}`;
+        this.resetInputs();
+        this.inputArray.push(this.displayValue);
         break;
       default:
         break;
     }
-    console.log(this.result);
-  }
-
-  private resetScreen() {
-    this.displayValue = '';
-  }
-
-  private resetValues() {
-    this.values = Array.from(+this.displayValue);
-  }
-
-  public updateCurrentValue() {
-    this.values.push(+this.displayValue);
-    this.calculate(this.currentMethod);
-    this.displayValue = this.result;
-    this.resetValues()
-  }
-
-  public clear() {
-    this.displayValue = '';
-    this.values = [];
   }
 
   public toggleSign() {
-    this.displayValue = (+this.displayValue * (-1));
+    // TODO
+    // let lastInput = this.inputArray[this.inputArray.length - 1]);
+    // let lastInputArr = [...lastInput];
+    // if (lastInputArr.length === 1) {
+    //   lastInput = +lastInput;
+    // } else {
+    //   lastInput = lastInputArr.filter(item => item !== '(' && item !== ')').join('');
+    // }
+    //
+    // if (lastInput > 0) {
+    //   this.inputArray.splice(this.inputArray.length - 1,1,`(${lastInput*(-1)})`);
+    // } else {
+    //   this.inputArray.splice(this.inputArray.length - 1,1,lastInput*(-1));
+    // }
   }
 
   public memorySettingHandler() {
     if (this.memory.readFromMemory) {
-      this.memory.addInMemory(+this.displayValue);
+      this.memory.addInMemory(+this.operation.equals(this.displayValue));
     } else {
-      this.memory.saveToMemory = +this.displayValue;
+      if (this.displayValue.length !== 0) {
+        this.equals();
+        this.memory.saveToMemory = +this.operation.equals(this.displayValue);
+        this.resetInputs();
+      }
     }
   }
 
   public readFromMemory() {
     this.memory.readFromMemory ? this.displayValue = `${this.memory.readFromMemory}` : ErrorMessages.MemoryEmpty;
+    this.resetInputs();
   }
 
   public memorySubtract() {
     if (!this.memory.readFromMemory) {
       return;
     }
-    this.memory.subtractInMemory(+this.displayValue);
+    this.memory.subtractInMemory(+this.operation.equals(this.displayValue));
+  }
+
+  public clear() {
+    this.displayValue = '0';
+    this.resetInputs();
   }
 
   public clearAll() {
     this.clear();
     this.memory.clearMemory();
+  }
+
+  public acHandler() {
+    if (this.calculatorOn) {
+      this.clearAll();
+    } else {
+      this.on();
+    }
   }
 
   public clearMemory() {

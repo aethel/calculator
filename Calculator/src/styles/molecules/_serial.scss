@@ -1,0 +1,17 @@
+.serial {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.8rem;
+  position: relative;
+
+  &::before {
+    content: 'SL-300SV';
+    font-family: Arial;
+    justify-self: left;
+    font-size: 1.1rem;
+    font-weight: bold;
+    left: 3rem;
+    position: absolute;
+    top: 1.2rem;
+  }
+}

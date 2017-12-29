@@ -1,0 +1,12 @@
+@import '~styles/global/variables';
+@import '~styles/global/mixins';
+
+.default-btn__wrapper {
+  @include gradient(180deg, $button-list);
+  font-size: 2rem;
+  border-radius: 0.5rem 0.5rem 1.6rem 1.6rem;
+  color: $white;
+  padding: 0.6rem 0.7rem;
+  border:none;
+  box-shadow: 0 0 0.15rem 0.3rem $black;
+}

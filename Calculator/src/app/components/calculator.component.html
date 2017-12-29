@@ -1,27 +1,41 @@
-<input type="text" readonly [ngModel]="displayValue" />
-<button (click)="concatenateValue('1')">1</button>
-<button (click)="concatenateValue('2')">2</button>
-<button (click)="concatenateValue('3')">3</button>
-<button (click)="concatenateValue('4')">4</button>
-<button (click)="concatenateValue('5')">5</button>
-<button (click)="concatenateValue('6')">6</button>
-<button (click)="concatenateValue('7')">7</button>
-<button (click)="concatenateValue('8')">8</button>
-<button (click)="concatenateValue('9')">9</button>
-<button (click)="concatenateValue('0')">0</button>
-<button (click)="concatenateValue('.')">.</button>
-
-
-<button (click)="toggleSign()">+/-</button>
-<button (click)="updatePrerequisites('add')">+</button>
-<button (click)="updatePrerequisites('subtract')">-</button>
-<button (click)="updatePrerequisites('divide')">/</button>
-<button (click)="updatePrerequisites('multiply')">*</button>
-<button (click)="updatePrerequisites('sqRoot'); updateCurrentValue()">sqRoot</button>
-<button (click)="updateCurrentValue()">=</button>
-<button (click)="clear()">C</button>
-<button (click)="clearAll()">AC</button>
-<button (click)="readFromMemory()">MR</button>
-<button (click)="clearMemory()">MC</button>
-<button (click)="memorySettingHandler()">M+</button>
-<button (click)="memorySubtract()">M-</button>
+<div class="case">
+  <div class="logo"></div>
+  <div class="panel">
+    <div class="panel__face"></div>
+  </div>
+  <div class="result">
+    <div class="result__wrapper" [class.has-memory]="memory.readFromMemory">
+      <input class="result__display" type="text" readonly [ngModel]="displayValue" />
+    </div>
+  </div>
+  <div class="serial">
+    <c-button [class.is-off]="!calculatorOn" (click)="calculate('sqRoot')" type="short" key="&radic;"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="off()" type="short" key="OFF"></c-button>
+  </div>
+  <div class="keys">
+    <c-button [class.is-off]="!calculatorOn" (click)="clearMemory()" type="smallFont" key="MC"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="readFromMemory()" type="smallFont" key="MR"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="memorySubtract()" type="smallFont" key="M-"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="memorySettingHandler()" type="smallFont" key="M+"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('/')" key="/"></c-button>
+    <c-button class="is-off" disabled (click)="updateExpression('%')" key="%"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('7')" key="7"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('8')" key="8"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('9')" key="9"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('*')" key="X"></c-button>
+    <c-button class="is-off" disabled (click)="updateExpression('*')" key="+/-"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('4')" key="4"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('5')" key="5"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('6')" key="6"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('-')" key="-"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="clear()" key="C" type="warn"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('1')" key="1"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('2')" key="2"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('3')" key="3"></c-button>
+    <c-button [class.is-off]="!calculatorOn" class="two-row-last" type="tall" (click)="updateExpression('+')" key="+"></c-button>
+    <c-button (click)="acHandler()" type="guards" key="AC"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('0')" key="0"></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="updateExpression('.')" key="."></c-button>
+    <c-button [class.is-off]="!calculatorOn" (click)="equals()" key="="></c-button>
+  </div>
+</div>

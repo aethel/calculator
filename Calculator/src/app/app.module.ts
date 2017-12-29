@@ -7,12 +7,14 @@ import { MemoryService, OperationsService } from './services'
 
 import { AppComponent } from './app.component';
 import { CalculatorComponent } from './components/calculator.component';
+import { ButtonComponent } from './components/button/button.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
