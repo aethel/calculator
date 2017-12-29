@@ -95,7 +95,7 @@ export class CalculatorComponent {
   }
 
   public clear() {
-    this.displayValue = '';
+    this.displayValue = '0';
     this.resetInputs();
   }
 
