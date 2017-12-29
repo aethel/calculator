@@ -2,20 +2,32 @@
 $gradient-list: darken($display-accent, 20%) 0%, darken($display-accent, 5%) 100%;
 
 .result__wrapper {
-padding: 2.5rem 1rem 3.5rem 1rem;
-background: $display-accent;
-border-radius: 0.75rem;
-position: relative;
+  padding: 2.5rem 1rem 3.5rem;
+  background: $display-accent;
+  border-radius: 0.75rem;
+  position: relative;
+
   &:after {
     content: '';
-    @include gradient(45deg, $gradient-list)
-    position: absolute;
-  	left: 0.75rem;
-  	top: 0.5rem;
-  	bottom: 1.9rem;
-  	right: 0.75rem;
-  	border-radius: 0.72rem;
+    @include gradient(45deg, $gradient-list) position: absolute;
+    left: 0.75rem;
+    top: 0.5rem;
+    bottom: 1.9rem;
+    right: 0.75rem;
+    border-radius: 0.72rem;
     filter: blur(0.13rem);
+  }
+
+  &.has-memory:before {
+    content: 'M';
+    font-family: arial;
+    position: absolute;
+    z-index: 9;
+    font-size: 1.5rem;
+    font-style: italic;
+    left: 1.5rem;
+    font-weight: bold;
+    top: 3rem;
   }
 }
 
@@ -25,12 +37,12 @@ position: relative;
   border-radius: 0.3rem;
   border: none;
   font-size: 6rem;
-	display: inline-block;
-	width: calc(100% - 2rem);
-	font-weight: bold;
+  display: inline-block;
+  width: calc(100% - 2rem);
+  font-weight: bold;
   padding: 0 0.5rem 0 1.5rem;
-	transform: scaleY(1.5);
-	line-height: 1;
+  transform: scaleY(1.5);
+  line-height: 1;
   position: relative;
   z-index: 1;
   text-align: right;
